@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d18">
+  <title>SAMARA EDU — открытая база знаний</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" onclick="goHome();return false">
+      <span class="brand-mark">S</span><span>SAMARA<span class="brand-accent">EDU</span><small>ОТКРЫТАЯ БАЗА ЗНАНИЙ</small></span>
+    </a>
+    <nav><a href="#catalog" onclick="goHome()">Каталог</a><a href="#about">О платформе</a></nav>
+    <button class="ghost-btn" onclick="showSaved()">♡ <span>Избранное</span></button>
+  </header>
+
+  <main>
+    <section id="homeView">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span> ПРОСТРАНСТВО ЗНАНИЙ САМАРСКОГО УНИВЕРСИТЕТА</div>
+          <h1>Учись. Создавай.<br><span>Открывай больше.</span></h1>
+          <p>Открытая база видеоуроков и полезных учебных материалов по предметам твоей образовательной программы.</p>
+          <a class="primary-btn" href="#catalog">Открыть каталог <span>↗</span></a>
+          <div class="hero-meta"><span>◉ Без регистрации</span><span>▶ Видеоуроки</span><span>▤ Полезные материалы</span></div>
+        </div>
+        <div class="hero-art">
+          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+          <div class="core"><div class="core-inner">S<span>EDU</span></div></div>
+          <div class="float-card card-code"><span class="mini-icon">⌘</span><div><b>IT & CODE</b><small>Знания без границ</small></div></div>
+          <div class="float-card card-play"><span class="play-icon">▶</span><div><b>Видеоуроки</b><small>Учись в своём темпе</small></div></div>
+          <div class="float-card card-data"><span class="mini-icon">▥</span><div><b>Материалы</b><small>Всё по полочкам</small></div></div>
+        </div>
+      </section>
+
+      <section class="catalog-section" id="catalog">
+        <div class="section-heading">
+          <div><div class="eyebrow">ТВОЙ МАРШРУТ ОБУЧЕНИЯ</div><h2>Выбери направление</h2><p>Выбери направление, курс и семестр — предметы появятся отдельными вкладками.</p></div>
+          <div class="catalog-count"><b id="programCount">34</b><span>направлений<br>в подборке</span></div>
+        </div>
+        <div class="catalog-toolbar">
+          <label class="search-box"><span>⌕</span><input id="searchInput" placeholder="Поиск направления, профиля или кода..." oninput="renderPrograms()"></label>
+          <span class="filter-label">ИНСТИТУТ</span><span class="filter-chip active">Информатики и кибернетики</span>
+        </div>
+        <div class="catalog-layout">
+          <aside class="institute-card">
+            <div class="institute-symbol">⌬</div><div class="eyebrow">ИНСТИТУТ</div>
+            <h3>Информатики<br>и кибернетики</h3>
+            <p>Подготовка специалистов в области информационных технологий, программирования, искусственного интеллекта и защиты информации.</p>
+            <a href="https://ssau.ru/info/struct/op/faculties/iime" target="_blank" rel="noreferrer">Об институте ↗</a>
+            <div class="institute-foot"><span class="status-dot"></span> Самарский университет</div>
+          </aside>
+          <div class="program-grid" id="programGrid"></div>
+        </div>
+      </section>
+
+      <section class="steps-section" id="about">
+        <div class="eyebrow">ПРОСТОЙ ПУТЬ К ЗНАНИЯМ</div><h2>От программы — к нужной теме</h2>
+        <div class="steps-grid">
+          <article><span>01</span><div class="step-icon">⌘</div><h3>Выбери направление</h3><p>Выбери направление, по которому хочешь посмотреть предметы.</p></article>
+          <article><span>02</span><div class="step-icon">▤</div><h3>Выбери курс и семестр</h3><p>Выбери курс и семестр — появятся предметы.</p></article>
+          <article><span>03</span><div class="step-icon">▶</div><h3>Изучай материалы</h3><p>Открывай предметы. Видео добавим следующим этапом.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <section id="courseView" class="hidden">
+      <div class="breadcrumb"><button onclick="goHome()">Каталог</button><span>/</span><span id="crumbProgram"></span><span>/</span><b id="crumbLocation">Выбор курса</b></div>
+      <div class="course-header">
+        <div><div class="eyebrow">ОБРАЗОВАТЕЛЬНАЯ ПРОГРАММА</div><h1 id="courseTitle">Название программы</h1><p id="courseSubtitle"></p></div>
+        <button class="save-btn" id="saveCourseBtn" onclick="toggleSaved()">♡ <span>В избранное</span></button>
+      </div>
+      <div class="study-selector">
+        <label>Курс обучения<select id="yearSelect" onchange="selectYear(this.value)"></select></label>
+        <label>Семестр<select id="semesterSelect" onchange="selectSemester(this.value)"></select></label>
+      </div>
+      <div class="catalog-subheading"><div><div class="eyebrow" id="semesterEyebrow">УЧЕБНЫЙ ПЛАН</div><h2 id="semesterTitle">Предметы</h2><p id="semesterDescription">Выбери направление, затем курс и семестр — предметы появятся вкладками.</p></div></div>
+      <div class="course-content">
+        <div class="lesson-list" id="lessonList"></div>
+        <aside class="course-aside"><div class="aside-top"><span class="play-icon">▶</span><div><b>Открытая база знаний</b><small>Видео и дополнительные материалы</small></div></div><div class="aside-note">Здесь нет регистрации, тестов и оценок. Можно свободно смотреть материалы и готовиться к занятиям в удобном темпе.</div><a href="https://ssau.ru/sveden/education/eduop" target="_blank" rel="noreferrer" class="official-link">Официальные учебные планы ↗</a></aside>
+      </div>
+    </section>
+  </main>
+  <footer><div class="footer-brand">SAMARA<span>EDU</span></div><p>Независимый образовательный проект для студентов Самарского университета.</p><small>Видеоуроки и дополнительные материалы собраны в открытом доступе для самостоятельного изучения.</small></footer>
+  <div id="toast" class="toast"></div>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
